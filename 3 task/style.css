@@ -1,0 +1,223 @@
+/* ---------- Reset: removes the default side gaps ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --edge: 18px;                 /* thickness of the white line on the left only */
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    background: #fff;             /* white shows only on the left side */
+}
+
+body {
+    font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+    background: #86302f;          /* red panel, inset from the left edge only */
+    width: calc(100% - var(--edge));   /* white line on the left only */
+    min-height: 100vh;
+    margin: 0 0 0 var(--edge);         /* no white line on right or bottom */
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+
+    /* two columns: left = Submission text, right = form */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 4vw;
+    padding-bottom: 60px;
+}
+
+/* white triangle in the bottom-right corner */
+body::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 110px;
+    height: 110px;
+    background: #fff;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* ---------- Header (white strip with logo) ---------- */
+.header {
+    grid-column: 1 / -1;
+    background: #fff;
+    padding: 20px 20px 16px;
+    width: 100%;
+}
+
+.logo img {
+    display: block;
+    width: 80px;
+    height: auto;
+}
+
+/* ---------- Left column: Submission text ---------- */
+.sub.detail {
+    grid-column: 1;
+    grid-row: 2 / 4;
+    align-self: center;
+    padding: 0 0 0 6vw;
+    max-width: 560px;
+}
+
+.sub .heading h1 {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.sub .para p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #1a0a0a;
+    max-width: 340px;
+    margin-bottom: 20px;
+}
+
+.application h4 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #1a0a0a;
+    max-width: 300px;
+}
+
+/* ---------- Right column: personal info inputs ---------- */
+.info {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 50px 6vw 20px 0;
+    max-width: 560px;
+}
+
+.info br {
+    display: none;                /* spacing handled by CSS instead */
+}
+
+.info input[type="text"] {
+    display: block;
+    width: 100%;
+    height: 42px;
+    margin-bottom: 14px;
+    padding: 0 12px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 0;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.7rem;
+    outline: none;
+}
+
+/* ---------- Right column: awards ---------- */
+.Award {
+    grid-column: 2;
+    grid-row: 3;
+    padding: 0 6vw 0 0;
+    max-width: 560px;
+}
+
+.awd.heading h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #1a0a0a;
+    margin-bottom: 4px;
+}
+
+.awd.detail p {
+    font-size: 0.55rem;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+/* checkbox rows */
+.check1,
+.check2,
+.check3,
+.check4,
+.check5 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    margin-bottom: 6px;
+}
+
+.Award input[type="checkbox"] {
+    width: 13px;
+    height: 13px;
+    margin-right: 8px;
+    accent-color: #fff;
+    cursor: pointer;
+}
+
+/* description boxes */
+.Award textarea {
+    display: block;
+    width: 100%;
+    height: 58px;
+    margin-bottom: 14px;
+    padding: 8px 10px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 0;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.65rem;
+    resize: none;
+    outline: none;
+}
+
+::placeholder {
+    color: #fff;
+    opacity: 1;
+}
+
+/* ---------- Submit button ---------- */
+.Award button {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    padding: 12px 40px;
+    background: #fff;
+    color: #222;
+    border: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.Award button i {
+    font-size: 1.1rem;
+}
+
+/* ---------- Mobile: stack into one column ---------- */
+@media (max-width: 800px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .sub.detail,
+    .info,
+    .Award {
+        grid-column: 1;
+        grid-row: auto;
+        padding: 30px 6vw;
+        max-width: 100%;
+    }
+}
